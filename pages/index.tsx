@@ -8,6 +8,8 @@ import Slider from "@/components/slider/Slider";
 import Toast from "@/components/toast/Toast";
 import { useState } from "react";
 
+("cSpell: disable");
+
 export default function Home() {
   const [toastOpen, setToastOpen] = useState<boolean>(false);
 
@@ -34,12 +36,11 @@ export default function Home() {
           <Modal.Trigger className="bg-blue-500 px-5 py-2 text-white rounded">Open Modal</Modal.Trigger>
           <Modal.Content className="bg-white rounded flex flex-col justify-between text-black p-5 max-w-sm">
             <h1 className="font-semibold text-lg mb-2">Title of modal</h1>
-            {/* cSpell: disable */}
             <p className="text-sm text-black/60">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua.
             </p>
-            {/* cSpell: enable */}
+
             <Modal.Close className="text-blue-500 bg-blue-100 border border-blue-200 rounded self-end px-5 py-2 text-sm shadow">
               Close
             </Modal.Close>
@@ -116,7 +117,6 @@ export default function Home() {
               <p className="text-black text-sm text-center">
                 This text is only visible when you are hovering the Trigger element of the component ❤
               </p>
-              <h1 className="text-lg font-semibold underline text-center">✅ Hire Me</h1>
             </div>
           </Hover.Content>
         </Hover>

@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import { createContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface IHoverProps {
@@ -18,7 +17,12 @@ interface IHoverContext {
 
 const HoverContext = createContext<IHoverContext | null>(null);
 
-const Hover = (props: IHoverProps) => {
+interface IHoverComponent extends FC<IHoverProps> {
+  Trigger: FC<IHoverTriggerProps>;
+  Content: FC<IHoverContentProps>;
+}
+
+const Hover: IHoverComponent = (props) => {
   const { delay = 0 } = props;
 
   const [isHover, setIsHover] = useState<boolean>(false);
@@ -50,10 +54,12 @@ const Hover = (props: IHoverProps) => {
   }
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
     if (isHover || isFocus) {
-      var timeout = setTimeout(handleOpenContent, delay);
+      timeout = setTimeout(handleOpenContent, delay);
     } else {
-      var timeout = setTimeout(handleCloseContent, delay < 200 ? 200 : delay);
+      timeout = setTimeout(handleCloseContent, delay < 200 ? 200 : delay);
     }
 
     return () => clearTimeout(timeout);
@@ -79,6 +85,7 @@ const Hover = (props: IHoverProps) => {
               return child;
             }
           }
+          return null;
         })}
       </div>
     </HoverContext.Provider>
@@ -90,7 +97,7 @@ interface IHoverTriggerProps {
   className?: string;
 }
 
-Hover.Trigger = (props: IHoverTriggerProps) => {
+const HoverTrigger: FC<IHoverTriggerProps> = (props) => {
   const { handleMouseEnter, handleMouseLeave, handleFocus, handleBlur } = useContext(HoverContext)!;
 
   return (
@@ -112,7 +119,7 @@ interface IHoverContentProps {
   className?: string;
 }
 
-Hover.Content = (props: IHoverContentProps) => {
+const HoverContent: FC<IHoverContentProps> = (props) => {
   const { isOpen, handleMouseEnter, handleMouseLeave, handleFocus, handleBlur } = useContext(HoverContext)!;
 
   if (isOpen) {
@@ -128,7 +135,12 @@ Hover.Content = (props: IHoverContentProps) => {
         {props.children}
       </div>
     );
+  } else {
+    return null;
   }
 };
+
+Hover.Trigger = HoverTrigger;
+Hover.Content = HoverContent;
 
 export default Hover;

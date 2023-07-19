@@ -1,11 +1,17 @@
-import React from "react";
+import Image from "next/image";
+import React, { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface IAvatarProps {
   children: React.ReactNode | React.ReactNode[];
 }
 
-const Avatar = (props: IAvatarProps) => {
+interface IAvatarComponent extends FC<IAvatarProps> {
+  Image: FC<IAvatarImageProps>;
+  Fallback: FC<IAvatarFallbackProps>;
+}
+
+const Avatar: IAvatarComponent = (props) => {
   return (
     <>
       {React.Children.map(props.children, (child) => {
@@ -28,8 +34,16 @@ interface IAvatarImageProps {
   alt: string;
 }
 
-Avatar.Image = (props: IAvatarImageProps) => {
-  return <img className={twMerge("w-12 h-12 rounded-full", props.className)} src={props.src} alt={props.alt} />;
+const AvatarImage: FC<IAvatarImageProps> = (props) => {
+  return (
+    <Image
+      className={twMerge("w-12 h-12 rounded-full", props.className)}
+      width={200}
+      height={200}
+      src={props.src}
+      alt={props.alt}
+    />
+  );
 };
 
 interface IAvatarFallbackProps {
@@ -37,7 +51,7 @@ interface IAvatarFallbackProps {
   children: React.ReactNode | React.ReactNode[];
 }
 
-Avatar.Fallback = (props: IAvatarFallbackProps) => {
+const AvatarFallback: FC<IAvatarFallbackProps> = (props) => {
   return (
     <div
       className={twMerge(
@@ -49,5 +63,8 @@ Avatar.Fallback = (props: IAvatarFallbackProps) => {
     </div>
   );
 };
+
+Avatar.Image = AvatarImage;
+Avatar.Fallback = AvatarFallback;
 
 export default Avatar;

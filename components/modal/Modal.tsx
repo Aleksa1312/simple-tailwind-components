@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface IModalProps {
@@ -13,7 +13,14 @@ interface IModalContext {
 
 const ModalContext = createContext<IModalContext | null>(null);
 
-const Modal = (props: IModalProps) => {
+interface IModalComponent extends FC<IModalProps> {
+  Trigger: FC<IModalTriggerProps>;
+  Content: FC<IModalContentProps>;
+  Close: FC<IModalCloseProps>;
+  Overlay: FC<IModalOverlayProps>;
+}
+
+const Modal: IModalComponent = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   function handleOpen() {
@@ -37,9 +44,9 @@ const Modal = (props: IModalProps) => {
       }
     }
 
-    document.addEventListener("keydown", (e) => handleEscPress(e));
+    document.addEventListener("keydown", handleEscPress);
 
-    return () => document.removeEventListener("keydown", (e) => handleEscPress(e));
+    return () => document.removeEventListener("keydown", handleEscPress);
   }, []);
 
   return (
@@ -50,6 +57,9 @@ const Modal = (props: IModalProps) => {
             return child;
           }
           if (child.type === Modal.Content) {
+            return child;
+          }
+          if (child.type === Modal.Close) {
             return child;
           }
           if (child.type === Modal.Overlay) {
@@ -66,7 +76,7 @@ interface IModalTriggerProps {
   className?: string;
 }
 
-Modal.Trigger = (props: IModalTriggerProps) => {
+const ModalTrigger: FC<IModalTriggerProps> = (props) => {
   const { handleOpen } = useContext(ModalContext)!;
 
   return (
@@ -81,15 +91,18 @@ interface IModalContentProps {
   className?: string;
 }
 
-Modal.Content = (props: IModalContentProps) => {
+const ModalContent: FC<IModalContentProps> = (props) => {
   const { isOpen } = useContext(ModalContext)!;
 
-  if (isOpen)
+  if (isOpen) {
     return (
       <ol className="fixed top-0 bottom-0 left-0 right-0 m-auto p-5 z-50 h-fit w-fit">
         <ul className={props.className}>{props.children}</ul>
       </ol>
     );
+  } else {
+    return null;
+  }
 };
 
 interface IModalCloseProps {
@@ -97,7 +110,7 @@ interface IModalCloseProps {
   className?: string;
 }
 
-Modal.Close = (props: IModalCloseProps) => {
+const ModalClose: FC<IModalCloseProps> = (props) => {
   const { handleClose } = useContext(ModalContext)!;
 
   return (
@@ -111,10 +124,10 @@ interface IModalOverlayProps {
   className?: string;
 }
 
-Modal.Overlay = (props: IModalOverlayProps) => {
+const ModalOverlay: FC<IModalOverlayProps> = (props) => {
   const { isOpen, handleClose } = useContext(ModalContext)!;
 
-  if (isOpen)
+  if (isOpen) {
     return (
       <div
         onClick={handleClose}
@@ -122,6 +135,14 @@ Modal.Overlay = (props: IModalOverlayProps) => {
         tabIndex={0}
       />
     );
+  } else {
+    return null;
+  }
 };
+
+Modal.Trigger = ModalTrigger;
+Modal.Content = ModalContent;
+Modal.Close = ModalClose;
+Modal.Overlay = ModalOverlay;
 
 export default Modal;

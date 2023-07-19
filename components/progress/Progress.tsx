@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface IProgressProps {
@@ -13,7 +13,12 @@ interface IProgressContext {
 
 const ProgressContext = createContext<IProgressContext | null>(null);
 
-const Progress = (props: IProgressProps) => {
+interface IProgressComponent extends FC<IProgressProps> {
+  Fill: FC<IProgressFillProps>;
+  Value: FC<IProgressValueProps>;
+}
+
+const Progress: IProgressComponent = (props) => {
   const { value = 0 } = props;
 
   const progressContextValue: IProgressContext = {
@@ -42,7 +47,7 @@ interface IProgressFillProps {
   className?: string;
 }
 
-Progress.Fill = (props: IProgressFillProps) => {
+const ProgressFill: FC<IProgressFillProps> = (props) => {
   const { value } = useContext(ProgressContext)!;
 
   return <div className={twMerge("h-full", props.className)} style={{ width: `${value}%` }}></div>;
@@ -52,10 +57,17 @@ interface IProgressValueProps {
   className?: string;
 }
 
-Progress.Value = (props: IProgressValueProps) => {
+const ProgressValue: FC<IProgressValueProps> = (props) => {
   const { value } = useContext(ProgressContext)!;
 
   return <p className={twMerge("absolute", props.className)}>{value}%</p>;
 };
+
+Progress.Fill = ProgressFill;
+Progress.Value = ProgressValue;
+
+Progress.displayName = "Progress";
+ProgressFill.displayName = "Progress.Fill";
+ProgressValue.displayName = "Progress.Value";
 
 export default Progress;

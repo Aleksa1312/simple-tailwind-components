@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import { createContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface IDropdownProps {
@@ -15,7 +14,13 @@ interface IDropdownContext {
 
 const DropdownContext = createContext<IDropdownContext | null>(null);
 
-const Dropdown = (props: IDropdownProps) => {
+interface IDropdownComponent extends FC<IDropdownProps> {
+  Trigger: FC<IDropdownTriggerProps>;
+  Content: FC<IDropdownContentProps>;
+  Overlay: FC<IDropdownOverlayProps>;
+}
+
+const Dropdown: IDropdownComponent = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   function handleOpen() {
@@ -39,9 +44,9 @@ const Dropdown = (props: IDropdownProps) => {
       }
     }
 
-    document.addEventListener("keydown", (e) => handleEscPress(e));
+    document.addEventListener("keydown", handleEscPress);
 
-    return () => document.removeEventListener("keydown", (e) => handleEscPress(e));
+    return () => document.removeEventListener("keydown", handleEscPress);
   }, []);
 
   return (
@@ -70,7 +75,7 @@ interface IDropdownTriggerProps {
   className?: string;
 }
 
-Dropdown.Trigger = (props: IDropdownTriggerProps) => {
+const DropdownTrigger: FC<IDropdownTriggerProps> = (props) => {
   const { handleOpen, handleClose, isOpen } = useContext(DropdownContext)!;
 
   return (
@@ -85,7 +90,7 @@ interface IDropdownContentProps {
   className?: string;
 }
 
-Dropdown.Content = (props: IDropdownContentProps) => {
+const DropdownContent: FC<IDropdownContentProps> = (props) => {
   const { isOpen } = useContext(DropdownContext)!;
 
   if (isOpen) {
@@ -94,6 +99,8 @@ Dropdown.Content = (props: IDropdownContentProps) => {
         {props.children}
       </div>
     );
+  } else {
+    return null;
   }
 };
 
@@ -101,12 +108,18 @@ interface IDropdownOverlayProps {
   className?: string;
 }
 
-Dropdown.Overlay = (props: IDropdownOverlayProps) => {
+const DropdownOverlay: FC<IDropdownOverlayProps> = (props) => {
   const { handleClose, isOpen } = useContext(DropdownContext)!;
 
   if (isOpen) {
     return <label onClick={handleClose} className={twMerge("fixed w-full h-full top-0 left-0", props.className)} />;
+  } else {
+    return null;
   }
 };
+
+Dropdown.Trigger = DropdownTrigger;
+Dropdown.Content = DropdownContent;
+Dropdown.Overlay = DropdownOverlay;
 
 export default Dropdown;

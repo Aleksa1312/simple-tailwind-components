@@ -27,24 +27,25 @@ const Toast = (props: IToastProps) => {
       }
     }
 
-    document.addEventListener("keydown", (e) => handleEscPress(e));
+    document.addEventListener("keydown", handleEscPress);
 
-    return () => document.removeEventListener("keydown", (e) => handleEscPress(e));
-  }, []);
+    return () => document.removeEventListener("keydown", handleEscPress);
+  }, [props]);
 
   if (props.open) {
     return (
       <ToastContext.Provider value={toastContextValue}>
         {React.Children.map(props.children, (child) => {
-          if (React.isValidElement(child)) {
-            if (child.type === Toast.Content) {
-              return child;
-            }
+          if (React.isValidElement(child) && child.type === Toast.Content) {
+            return child;
           }
+          return null;
         })}
       </ToastContext.Provider>
     );
   }
+
+  return null;
 };
 
 interface IToastContentProps {
@@ -52,8 +53,8 @@ interface IToastContentProps {
   className?: string;
 }
 
-Toast.Content = (props: IToastContentProps) => {
-  const { onOpenChange, open } = useContext(ToastContext)!;
+const ToastContent = (props: IToastContentProps) => {
+  const { onOpenChange } = useContext(ToastContext)!;
 
   const [isHover, setIsHover] = useState<boolean>(false);
 
@@ -83,10 +84,8 @@ Toast.Content = (props: IToastContentProps) => {
     >
       <ul className={twMerge("w-full h-full p-5", props.className)} tabIndex={0}>
         {React.Children.map(props.children, (child) => {
-          if (React.isValidElement(child)) {
-            if (child.type === Toast.Close) {
-              return child;
-            }
+          if (React.isValidElement(child) && child.type === Toast.Close) {
+            return child;
           }
           return child;
         })}
@@ -100,7 +99,7 @@ interface IToastCloseProps {
   className?: string;
 }
 
-Toast.Close = (props: IToastCloseProps) => {
+const ToastClose = (props: IToastCloseProps) => {
   const { onOpenChange } = useContext(ToastContext)!;
 
   return (
@@ -109,5 +108,8 @@ Toast.Close = (props: IToastCloseProps) => {
     </button>
   );
 };
+
+Toast.Content = ToastContent;
+Toast.Close = ToastClose;
 
 export default Toast;
