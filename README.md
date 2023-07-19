@@ -6,6 +6,10 @@ This documentation provides an overview of the components included in the code s
 
 The components provided follow a modular approach, allowing developers to easily incorporate them into their projects. Each component focuses on a specific functionality and can be customized using Tailwind CSS utility classes. These components are designed to enhance user interfaces and provide interactive elements for a seamless user experience.
 
+# Demo:
+
+You can check out the components demo on: https://simple-tailwind-components-ympw.vercel.app/
+
 ## Avatar Component
 
 The Avatar component displays a user's profile picture along with a fallback display when the image is unavailable.
