@@ -10,6 +10,8 @@ The components provided follow a modular approach, allowing developers to easily
 
 The Avatar component displays a user's profile picture along with a fallback display when the image is unavailable.
 
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/3d6c5668-d074-4c98-b753-ac140773b276)
+
 ### Usage:
 ```jsx
 import Avatar from "@/components/avatar/Avatar";
@@ -41,6 +43,9 @@ import Avatar from "@/components/avatar/Avatar";
 
 The Badge component is used to highlight specific information with various types and styles.
 
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/41470484-031e-43ab-b581-8e24d3bf0bdd)
+
+
 ### Usage:
 ```jsx
 import Badge from "@/components/badge/Badge";
@@ -68,6 +73,10 @@ import Badge from "@/components/badge/Badge";
 ## Dropdown Component
 
 The Dropdown component creates a dropdown menu with customizable content.
+
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/17cdd909-cafd-47a6-aacf-54467ed2392a)
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/a160b16a-204b-4f2b-8073-15ce68092918)
+
 
 ### Usage:
 ```jsx
@@ -100,6 +109,9 @@ import Dropdown from "@/components/dropdown/Dropdown";
 
 The Hover component reveals additional content when hovering over a specific element.
 
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/b7ab3f8d-33d9-4a1e-b40a-216bf1ba6264)
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/0ef54161-eb96-41be-9e01-cebc20e0ace5)
+
 ### Usage:
 ```jsx
 import Hover from "@/components/hover/Hover";
@@ -131,6 +143,9 @@ Props:
 ## Modal Component
 
 The Modal component creates a modal dialog with customizable content.
+
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/851d5dde-e1be-4529-9b10-4091e57bedba)
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/8d54a232-82cb-411b-8278-a118f5a4e991)
 
 ### Usage:
 ```jsx
@@ -165,6 +180,8 @@ Props:
 
 The Progress component represents a progress bar with a customizable fill.
 
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/4f1ade20-44ca-4801-96d2-c8b92d38e9a2)
+
 ### Usage:
 ```jsx
 import Progress from "@/components/progress/Progress";
@@ -196,6 +213,8 @@ import Progress from "@/components/progress/Progress";
 
 The Slider component allows users to select a value within a defined range.
 
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/1cf85e7e-63f9-49c9-a8f1-2e318ae2d3ac)
+
 ### Usage:
 ```jsx
 import Slider from "@/components/slider/Slider";
@@ -224,6 +243,9 @@ import Slider from "@/components/slider/Slider";
 ## Toast Component
 
 The Toast component displays temporary notifications to provide feedback or important information to users.
+
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/3cf9942d-9679-4cca-b149-7f868c1555de)
+![image](https://github.com/Aleksa1312/simple-tailwind-components/assets/102186502/626beae7-ff46-46fb-b029-b6964bc732d1)
 
 ### Usage:
 ```jsx
