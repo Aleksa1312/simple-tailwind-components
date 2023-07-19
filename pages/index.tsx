@@ -34,7 +34,7 @@ export default function Home() {
         <h1 className="font-bold text-lg">Modal</h1>
         <Modal>
           <Modal.Trigger className="bg-blue-500 px-5 py-2 text-white rounded">Open Modal</Modal.Trigger>
-          <Modal.Content className="bg-white rounded flex flex-col justify-between text-black p-5 max-w-sm">
+          <Modal.Content className="bg-white rounded flex flex-col justify-between text-black p-5 max-w-sm animate-fade animate-duration-200">
             <h1 className="font-semibold text-lg mb-2">Title of modal</h1>
             <p className="text-sm text-black/60">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -45,7 +45,7 @@ export default function Home() {
               Close
             </Modal.Close>
           </Modal.Content>
-          <Modal.Overlay className="bg-black/50 backdrop-blur-sm" />
+          <Modal.Overlay className="bg-black/50 backdrop-blur-sm animate-fade animate-duration-200" />
         </Modal>
       </section>
 
@@ -55,7 +55,7 @@ export default function Home() {
           Open Toast
         </button>
         <Toast open={toastOpen} onOpenChange={setToastOpen}>
-          <Toast.Content className="bg-white rounded shadow flex flex-col">
+          <Toast.Content className="bg-white rounded shadow flex flex-col animate-fade-left animate-duration-200">
             <h1 className="text-black">The meeting has been scheduled</h1>
             <p className="text-black/50">Date: 23/10/2023</p>
             <Toast.Close className="text-xs text-blue-500 bg-blue-100 border-blue-200 shadow px-5 py-2 rounded border self-end mt-3">
@@ -69,7 +69,7 @@ export default function Home() {
         <h1 className="font-bold text-lg">Dropdown</h1>
         <Dropdown>
           <Dropdown.Trigger className="px-5 py-2 bg-blue-500 rounded">Open Dropdown</Dropdown.Trigger>
-          <Dropdown.Content className="w-64 py-2 bg-white rounded top-14 absolute text-black text-sm">
+          <Dropdown.Content className="w-64 py-2 bg-white rounded top-14 absolute text-black text-sm animate-fade-down animate-duration-200">
             <ul className="flex flex-col">
               <li className="w-full px-5 hover:bg-blue-100">
                 <button className="w-full h-full text-start py-2">Hello</button>
@@ -111,7 +111,7 @@ export default function Home() {
               Hover me
             </div>
           </Hover.Trigger>
-          <Hover.Content className="bottom-28">
+          <Hover.Content className="bottom-28 animate-fade-up animate-duration-200">
             <div className="w-52 h-52 bg-white rounded p-5 text-black gap-2 flex flex-col items-center shadow-lg">
               <h1 className="text-lg font-semibold text-center underline">This is a hover card</h1>
               <p className="text-black text-sm text-center">
