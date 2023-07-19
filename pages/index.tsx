@@ -68,7 +68,7 @@ export default function Home() {
       <section id="dropdown" className="flex flex-col items-center gap-3">
         <h1 className="font-bold text-lg">Dropdown</h1>
         <Dropdown>
-          <Dropdown.Trigger className="px-5 py-2 bg-blue-500 rounded">Open Dropdown</Dropdown.Trigger>
+          <Dropdown.Trigger className="px-5 py-2 bg-blue-500 rounded text-white">Open Dropdown</Dropdown.Trigger>
           <Dropdown.Content className="w-64 py-2 bg-white rounded top-14 absolute text-black text-sm animate-fade-down animate-duration-200">
             <ul className="flex flex-col">
               <li className="w-full px-5 hover:bg-blue-100">
@@ -107,7 +107,7 @@ export default function Home() {
         <h1 className="font-bold text-lg">Hover</h1>
         <Hover>
           <Hover.Trigger>
-            <div className="w-12 h-12 bg-blue-500 rounded-full select-none text-sm flex items-center justify-center text-center p-3 box-content">
+            <div className="w-12 h-12 bg-blue-500 text-white rounded-full select-none text-sm flex items-center justify-center text-center p-3 box-content">
               Hover me
             </div>
           </Hover.Trigger>
@@ -129,7 +129,7 @@ export default function Home() {
             value={sliderValue}
             className="w-full max-w-sm bg-blue-950 h-4 flex flex-col items-start rounded-full mx-auto"
           >
-            <Progress.Value className="text-xs self-center" />
+            <Progress.Value className="text-xs self-center text-white" />
             <Progress.Fill className="bg-blue-500 duration-200" />
           </Progress>
         </div>
