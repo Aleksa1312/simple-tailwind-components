@@ -8,7 +8,7 @@ The components provided follow a modular approach, allowing developers to easily
 
 # Demo:
 
-You can check out the components demo on: https://simple-tailwind-components-ympw.vercel.app/
+You can check out the components demo on: https://simple-tailwind-components.vercel.app/
 
 ## Avatar Component
 
